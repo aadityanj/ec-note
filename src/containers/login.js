@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import logo from './../assets/images/logo.png';
-import createBrowserHistory from 'history/createBrowserHistory'
 import { loginValidator } from '../utils/utils.validate';
-
-const history = createBrowserHistory()
+import {login} from './../api/index';
 
 class Login extends Component {
     constructor(props){
@@ -30,7 +28,22 @@ class Login extends Component {
     handleSubmit() {
        let validatedResult = loginValidator(this.state.emailId, this.state.password);
        if(validatedResult.valid) {
-
+            login(this.state.emailId, this.state.password)
+            .then( res => {
+                if(res.status == 200){
+                    sessionStorage.setItem('isAuthenticated', true);
+                    sessionStorage.setItem('token', res.data.token);
+                    this.props.history.push("/ec-note");
+                }
+            })
+            .catch( err => {
+                console.log(err);
+                this.setState({
+                    ['notify']: 'error',
+                    ['notifyHeader']: 'UnAuthorized',
+                    ['msg']: "Invalid UserName or password"
+                });
+            });
        } else {
         this.setState({
             ['notify']: 'error',
@@ -39,8 +52,7 @@ class Login extends Component {
         });
        }
     }
-
-
+  
     render() {
         return (
             <div className='login-form'>

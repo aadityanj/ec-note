@@ -3,12 +3,40 @@ import 'semantic-ui-css/semantic.min.css';
 import { Container, Button, Icon, Form, Grid, TextArea  } from 'semantic-ui-react';
 import '../index.css'
 import Navbar from './navbar';
+import {getUser} from './../api/index'
+import { connect } from 'react-redux'
+import { setUser } from '../actions';
 
 class EcNote extends Component {
 
-    show = () => this.setState({ open: true })
-    handleConfirm = () => this.setState({ result: 'confirmed', open: false })
-    handleCancel = () => this.setState({ result: 'cancelled', open: false })
+    constructor(props){
+        super(props);  
+        this.props = props;
+        this.store = this.props.store;
+    }
+
+
+
+    componentDidMount(){
+        let token = sessionStorage.getItem("token");
+        getUser(token)
+            .then( res => {
+                if(res.status == 200){
+                    this.setState({
+                        ['user'] : res.data
+                    })
+                    this.store.dispatch(setUser(res.data));
+                } else {
+                    sessionStorage.setItem("token", "");
+                    this.props.history.push("/login");
+                }
+            })
+            .catch( err => {
+                console.log(err);
+                sessionStorage.setItem("token", "");
+                this.props.history.push("/login");
+            });
+    }
     
     render() {
         return (
@@ -124,7 +152,9 @@ class EcNote extends Component {
                     height: 366px;
                 }
                 `}</style>
-                <Navbar/>
+                
+                <Navbar   {...this.props} />
+
                 <Container className="note-head">
                     <div className="add-dropdown">
                         <button className="add-btn"><Icon fitted name='add' /> <span>New</span></button>
@@ -209,5 +239,6 @@ class EcNote extends Component {
         )
     }
 }
+
 
 export default EcNote;

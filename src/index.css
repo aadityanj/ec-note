@@ -23,3 +23,179 @@ body {
   font-family: 'Roboto-Medium';
   src: url('./assets/fonts/Roboto/Roboto-Medium.ttf');
 }
+
+h2 {
+  width: 100%; 
+  text-align: center; 
+  border-bottom: 1px solid rgba(0,0,0,0.1); 
+  line-height: 0.1em;
+  margin: 10px 0 20px; 
+  color: #877457;
+  font-family: 'Roboto-Light'
+} 
+
+h2 span { 
+  background: #f6f2ef; 
+  padding:0 10px; 
+}
+
+.mt-10{
+  margin-top: 45px;
+}
+
+.add-btn{
+  bottom: -30px !important;
+  background: #fff !important;
+  border-radius: 20px;
+  position:relative;
+  padding: 10px;
+  padding-right: 15px;
+}
+
+.add-btn i{
+  background: #fff !important;
+  color: #00b5ad !important;
+}
+
+button.add-btn{
+  padding-left: 1rem !important;
+}
+
+button.add-btn:focus{
+  outline: 0 !important;
+  outline-offset: 0  !important;
+  background-image: none  !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none  !important;
+}
+
+.add-dropdown{
+  position:relative;
+}
+
+.create-note{
+  position: absolute;
+  top: 80px;
+  background: #fff;
+  display: none;
+  padding: 15px;
+  width: 250px;
+  border-radius: 10px;
+}
+
+.w-100{
+  width: 100% !important;
+}
+
+.ui.s-btn{
+  background: #00b5ad;
+  color: #fff;
+}
+
+.note-head{
+  height: 80px;
+}
+
+.note{
+  height: 400px;
+  background: #fff;
+}
+
+.note-header{
+  height: 34px;
+  padding-left: 10px;
+  background: bisque;
+}
+
+.note-text{
+
+}
+
+.note-title{
+  height: 100%;
+  background: transparent;
+  border-style: none;
+  width: 190px
+}
+
+.float-left{
+  float:left;
+}
+
+.float-right{
+  float:right;
+}
+
+.ui.buttons .button.note-action{
+  padding: 8px; 
+  background: transparent;
+}
+.note-textarea{
+  height: 366px;
+}
+
+body > div,
+body > div > div,
+body > div > div > div.login-form {
+    height: 100%;
+}
+body {
+    background: #f6f2ef;
+}
+.nav-tray{
+    width: 286px;
+    margin-top: 1rem;
+    display: inline-block;
+}
+.tray-item{
+    margin-right: 35px;
+}
+
+.nav-tray i{
+    font-size: 18px;
+    color: rgba(0,0,0,0.7);
+}
+.tray_name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-left :3px;
+    color: rgba(0,0,0,0.7);
+    font-family: 'Roboto-bold'
+}
+.float-left{
+    float: left;
+}
+.nav-left {
+    margin-top: 10px !important;
+    margin-left :10px !important;
+}
+.username {
+    background: #910bfe;
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+    padding-top: 6px;
+    margin-right: 20px;
+    color: white;
+    font-family: 'Roboto-Light';
+    border-radius: 20px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.ui.dropdown.username .menu{
+    right: 0 !important;
+    left: initial !important;
+}
+.ui.dropdown.username i{
+    display: none !important;
+}
+.ui.dropdown.username {
+    text-align: center !important;
+}
+.ui.dropdown.username .menu::after{
+    left: 80% !important;
+}
+.ui.dropdown.username {
+    font-family: 'Roboto-Light'
+}
