@@ -3,6 +3,7 @@ import 'semantic-ui-css/semantic.min.css';
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import logo from './../assets/images/logo.png';
 import createBrowserHistory from 'history/createBrowserHistory'
+import { loginValidator } from '../utils/utils.validate';
 
 const history = createBrowserHistory()
 
@@ -10,15 +11,35 @@ class Login extends Component {
     constructor(props){
         super(props);
         this.state={
-            username:'',
-            password:''
+            emailId:'',
+            password:'',
+            notify: 'hidden',
+            msg: '',
+            notifyHeader: ''
         }
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    handleClick(){
-        history.push("/signup");
-        window.location.reload();
-    } 
+    handleChange(e){
+        let target = e.target;
+        let v = target.id;
+        this.setState({[v]: target.value});
+    }
+    
+    handleSubmit() {
+       let validatedResult = loginValidator(this.state.emailId, this.state.password);
+       if(validatedResult.valid) {
+
+       } else {
+        this.setState({
+            ['notify']: 'error',
+            ['notifyHeader']: 'There was some errors with your submission',
+            ['msg']: validatedResult.errMsg
+        });
+       }
+    }
+
 
     render() {
         return (
@@ -43,22 +64,19 @@ class Login extends Component {
                     <Header as='h2' color='teal' textAlign='center'>
                     <Image src={logo} /> Log-in to your account
                     </Header>
-                    <Form size='large'>
+                    <Form size='large'  onSubmit={this.handleSubmit}>
                     <Segment stacked>
-                        <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' />
-                        <Form.Input
-                        fluid
-                        icon='lock'
-                        iconPosition='left'
-                        placeholder='Password'
-                        type='password'
-                        />
-
-                        <Button color='teal' fluid size='large'>
-                        Login
-                        </Button>
+                        <Form.Input fluid icon='user' id="emailId" value={this.state.emailId} onChange={this.handleChange}   iconPosition='left' placeholder='E-mail address' />
+                        <Form.Input fluid icon='lock' id="password" value={this.state.password} onChange={this.handleChange} iconPosition='left' placeholder='Password' type='password' />
+                        <Button type="submit" color='teal' fluid size='large'> Login </Button>
                     </Segment>
                     </Form>
+                    <Message
+                        error = {this.state.notify === 'error'}
+                        hidden = {this.state.notify === 'hidden'}
+                        header = {this.state.notifyHeader}
+                        list={[this.state.msg]}
+                    />
                     <Message>
                     New to us? <a href='/signup'>Sign Up</a>
                     </Message>

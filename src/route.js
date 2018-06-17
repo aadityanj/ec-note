@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import Login from './containers/login';
 import SignUp from './containers/signup';
 import {
@@ -9,7 +8,7 @@ import {
 } from 'react-router-dom';
 import {Switch} from 'react-router';
 
-class App extends Component {
+class RouterComponent extends Component {
   render() {
     return (
         <Router>
@@ -27,4 +26,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default RouterComponent;
