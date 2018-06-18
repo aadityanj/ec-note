@@ -15,7 +15,6 @@ class Navbar extends Component {
         this.state = {
             label: ''
         }
-        let state = this.store.getState().user;
         this.store.subscribe(() => {
             let state = this.store.getState().user;
             console.log(state);

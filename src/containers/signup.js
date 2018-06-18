@@ -3,6 +3,7 @@ import 'semantic-ui-css/semantic.min.css';
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import logo from './../assets/images/logo.png';
 import { signUpValidator } from '../utils/utils.validate';
+import { signUp } from '../api';
 
 class SignUp extends Component {
     constructor(props){
@@ -13,7 +14,7 @@ class SignUp extends Component {
             notifyHeader: '',
             firstName: '',
             lastName: '',
-            email: '',
+            emailId: '',
             userName: '',
             password: ''
         }
@@ -31,7 +32,30 @@ class SignUp extends Component {
        let user  = this.state;
        let validatedResult = signUpValidator(user.firstName, user.lastName, user.emailId, user.userName, user.password);
        if(validatedResult.valid) {
-
+            let user = {};
+            user.firstName = this.state.firstName;
+            user.lastName = this.state.lastName;
+            user.emailId = this.state.emailId;
+            user.userName = this.state.userName;
+            user.password = this.state.password;
+            signUp(user)
+            .then( res => {
+                if(res.status == 200){
+                    this.setState({
+                        ['notify']: 'positive',
+                        ['notifyHeader']: 'Your user registration was successful',
+                        ['msg']: 'You may now log-in with the username you have chosen'
+                    });
+                }
+            })
+            .catch( err => {
+                console.log(err);
+                this.setState({
+                    ['notify']: 'error',
+                    ['notifyHeader']: 'UnAuthorized',
+                    ['msg']: "Invalid UserName or password"
+                });
+            });
        } else {
         this.setState({
             ['notify']: 'error',
@@ -44,11 +68,6 @@ class SignUp extends Component {
     render() {
         return (
             <div className='login-form'>
-                {/*
-                Heads up! The styles below are necessary for the correct render of this example.
-                You can do same with CSS, the main idea is that all the elements up to the `Grid`
-                below must have a height of 100%.
-                */}
                 <style>{`
                 body > div,
                 body > div > div,
@@ -71,7 +90,7 @@ class SignUp extends Component {
                         <Form.Input fluid icon='mail'  id="emailId" value={this.state.emailId} onChange={this.handleChange}  iconPosition='left' placeholder='Email' />
                         <Form.Input fluid icon='user circle'  id="userName" value={this.userName} onChange={this.handleChange}  iconPosition='left' placeholder='User Name' />
                         <Form.Input fluid icon='lock'  id="password" value={this.state.password} onChange={this.handleChange}  iconPosition='left' placeholder='Password' type='password' />
-                        <Button color='teal' fluid size='large'>  Login </Button>
+                        <Button color='teal' fluid size='large'>  Sign Up</Button>
                     </Segment>
                     </Form>
                     <Message

@@ -32,7 +32,7 @@ function signUpValidator (firstName, lastName, emailId, userName, password) {
         errMsg = "Address Line1 is mandatory."
         valid = false
     } else if(!(userName && isAlphaNumeric(userName)=="success")){
-        errMsg = "Please provide valid Pincode."
+        errMsg = "Please provid valid user name"
         valid = false
     }
 

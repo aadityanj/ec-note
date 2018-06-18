@@ -69,9 +69,7 @@ class EcNote extends Component {
                      </div>               
                     <h2 className="ec-h2"><span>Notes</span></h2>
                 </Container>
-
                 <Note notes={this.state.notes}/>
-
             </div>
         )
     }

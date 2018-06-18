@@ -7,6 +7,10 @@ function login (emailId, password) {
       });
 }
 
+function signUp (user) {
+    return axios.post('http://localhost:4200/auth/create', user );
+}
+
 function getUser(token) {
     return axios.get("http://localhost:4200/user", getToken());
 }
@@ -22,4 +26,4 @@ function getToken(){
     };
 }
 
-export { login, getUser, getNotes }
+export { login, signUp, getUser, getNotes }
