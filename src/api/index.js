@@ -27,6 +27,10 @@ function moveToTrash(note) {
     return axios.put("http://localhost:4200/note/trash", note, getToken() )
 }
 
+function updateNote(id,note) {
+    return axios.put("http://localhost:4200/note/"+id,note, getToken());
+}
+
 function getToken(){
     let token = sessionStorage.getItem("token");
     return {
@@ -34,4 +38,4 @@ function getToken(){
     };
 }
 
-export { login, signUp, getUser, getNotes, createNote, moveToTrash }
+export { login, signUp, getUser, getNotes, createNote, moveToTrash, updateNote }

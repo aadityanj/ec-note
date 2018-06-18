@@ -124,7 +124,9 @@ button.add-btn:focus{
     border-style: none;
     width: 190px
 }
-
+input.note-title:focus{
+    outline: 0px;
+}
 .float-left{
     float:left;
 }
