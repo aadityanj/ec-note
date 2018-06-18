@@ -31,7 +31,7 @@ class Login extends Component {
        if(validatedResult.valid) {
             login(this.state.emailId, this.state.password)
             .then( res => {
-                if(res.status == 200){
+                if(res.status === 200){
                     sessionStorage.setItem('isAuthenticated', true);
                     sessionStorage.setItem('token', res.data.token);
                     this.props.history.push("/ec-note");

@@ -19,6 +19,14 @@ function getNotes(token) {
     return axios.get("http://localhost:4200/note/all", getToken());
 }
 
+function createNote(note) {
+    return axios.post("http://localhost:4200/note", note, getToken() )
+}
+
+function moveToTrash(note) {
+    return axios.put("http://localhost:4200/note/trash", note, getToken() )
+}
+
 function getToken(){
     let token = sessionStorage.getItem("token");
     return {
@@ -26,4 +34,4 @@ function getToken(){
     };
 }
 
-export { login, signUp, getUser, getNotes }
+export { login, signUp, getUser, getNotes, createNote, moveToTrash }
