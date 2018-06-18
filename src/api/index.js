@@ -8,10 +8,18 @@ function login (emailId, password) {
 }
 
 function getUser(token) {
-    var config = {
-        headers: {'Authorization': "bearer " + token}
-    };
-    return axios.get("http://localhost:4200/user", config);
+    return axios.get("http://localhost:4200/user", getToken());
 }
 
-export { login, getUser }
+function getNotes(token) {
+    return axios.get("http://localhost:4200/note/all", getToken());
+}
+
+function getToken(){
+    let token = sessionStorage.getItem("token");
+    return {
+        headers: {'Authorization': "bearer " + token}
+    };
+}
+
+export { login, getUser, getNotes }
