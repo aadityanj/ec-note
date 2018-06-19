@@ -114,10 +114,6 @@ button.add-btn:focus{
     background: bisque;
 }
 
-.note-text{
-
-}
-
 .note-title{
     height: 100%;
     background: transparent;
@@ -141,6 +137,29 @@ input.note-title:focus{
 }
 .note-textarea{
     height: 366px;
+    width: 100%;
+    border-width: 0px;
+    padding: 10px;
+}
+
+.note-textarea.history{
+    width: calc(100vw - 250px) !important;
+    float: left;
+    padding: 20px;
+}
+
+.historylist{
+    float:left;
+    width: 250px;
+    border-left: 1px solid rgba(0,0,0,0.3);
+    height: 100vh;
+    overflow: scroll;
+}
+
+textarea.note-textarea:focus{
+    outline: 0;
+    box-shadow: none;
+    border-width: 0px
 }
 .nav-tray{
     width: 286px;
@@ -211,4 +230,47 @@ input.note-title:focus{
 
 .ui.dropdown.username .text{
     text-transform: uppercase;
+}
+
+.note.fullscreen {
+    position: fixed;
+    top:0;
+    left:0;
+    bottom: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+}
+
+.note.fullscreen .note-textarea{
+    height: calc(100vh - 34px);
+}
+
+.note-action.active i{
+    color: #00b5ad !important;
+}
+
+.historyheader {
+    margin: 10px;
+    padding: 5px;
+    font-size: 24px;
+    text-align: center;
+    font-family: 'Roboto-Medium'
+}
+
+.revisionlist {
+    margin-top: 20px;
+}
+
+.revisionlist > div{
+    margin-top: 15px;
+    margin-left :10px;
+    color: rgba(0,0,0,0.5);
+    cursor: pointer;
+    font-family: 'Roboto-Light'
+}
+
+.history-active{
+    color: #00b5ad !important;
 }

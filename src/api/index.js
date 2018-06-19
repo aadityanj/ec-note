@@ -27,8 +27,12 @@ function moveToTrash(note) {
     return axios.put("http://localhost:4200/note/trash", note, getToken() )
 }
 
-function updateNote(id,note) {
+function updateNote(id, note) {
     return axios.put("http://localhost:4200/note/"+id,note, getToken());
+}
+
+function getHistory(id) {
+    return axios.get("http://localhost:4200/note/history/"+id, getToken());
 }
 
 function getToken(){
@@ -38,4 +42,4 @@ function getToken(){
     };
 }
 
-export { login, signUp, getUser, getNotes, createNote, moveToTrash, updateNote }
+export { login, signUp, getUser, getNotes, createNote, moveToTrash, updateNote, getHistory }
