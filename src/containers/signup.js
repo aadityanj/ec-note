@@ -15,7 +15,6 @@ class SignUp extends Component {
             firstName: '',
             lastName: '',
             emailId: '',
-            userName: '',
             password: ''
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,13 +29,12 @@ class SignUp extends Component {
     
     handleSubmit() {
        let user  = this.state;
-       let validatedResult = signUpValidator(user.firstName, user.lastName, user.emailId, user.userName, user.password);
+       let validatedResult = signUpValidator(user.firstName, user.lastName, user.emailId, user.password);
        if(validatedResult.valid) {
             let user = {};
             user.firstName = this.state.firstName;
             user.lastName = this.state.lastName;
             user.emailId = this.state.emailId;
-            user.userName = this.state.userName;
             user.password = this.state.password;
             signUp(user)
             .then( res => {
@@ -44,7 +42,7 @@ class SignUp extends Component {
                     this.setState({
                         ['notify']: 'positive',
                         ['notifyHeader']: 'Your user registration was successful',
-                        ['msg']: 'You may now log-in with the username you have chosen'
+                        ['msg']: 'You may now log-in with the email Id you have chosen'
                     });
                 }
             })
@@ -53,7 +51,7 @@ class SignUp extends Component {
                 this.setState({
                     ['notify']: 'error',
                     ['notifyHeader']: 'UnAuthorized',
-                    ['msg']: "Invalid UserName or password"
+                    ['msg']: "The given email Id or password is wrong "
                 });
             });
        } else {
@@ -88,7 +86,6 @@ class SignUp extends Component {
                         <Form.Input fluid icon='user'  id="firstName" value={this.state.firstName} onChange={this.handleChange}  iconPosition='left' placeholder='First Name' />
                         <Form.Input fluid icon='user'  id="lastName" value={this.state.lastName} onChange={this.handleChange}  iconPosition='left' placeholder='Last Name' />
                         <Form.Input fluid icon='mail'  id="emailId" value={this.state.emailId} onChange={this.handleChange}  iconPosition='left' placeholder='Email' />
-                        <Form.Input fluid icon='user circle'  id="userName" value={this.userName} onChange={this.handleChange}  iconPosition='left' placeholder='User Name' />
                         <Form.Input fluid icon='lock'  id="password" value={this.state.password} onChange={this.handleChange}  iconPosition='left' placeholder='Password' type='password' />
                         <Button color='teal' fluid size='large'>  Sign Up</Button>
                     </Segment>

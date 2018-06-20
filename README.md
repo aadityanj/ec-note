@@ -2,7 +2,7 @@
 
 # Description 
 
-Ec-Note is a web application designed for notes taking, maintaining the revisions, restoring the revisions. It allows users to create notes, edit notes, delete notes, restore old notes from the history which notes are plaintexts. 
+Ec-Note is a web application designed for notes taking, maintaining the revisions, restoring the revisions. It allows users to create, edit, delete, restore notes. Each note is a plain text file. 
 
 # Installation & Setup
 - Install Latest LTS version of [Node JS](https://nodejs.org/en/) globally.  
@@ -22,7 +22,7 @@ Ec-Note is a web application designed for notes taking, maintaining the revision
     $ cd ec-note
     $ cd src
    ```
-  - step2 
+  - step 2 
     Open `url.js` in any text editor and change it to your backend server url accordingly   
 - To run the project in the development mode
   - 
@@ -30,11 +30,13 @@ Ec-Note is a web application designed for notes taking, maintaining the revision
     $ cd ec-note
     $ yarn start
    ```
-- Deployment
-'yarn run build` creates a `build` directory with a production build of your app. Set up your favorite HTTP server so that a visitor to your site is served `index.html`, and requests to static paths like `/static/js/main.<hash>.js` are served with the contents of the `/static/js/main.<hash>.js` file.
+- # Deployment
+  `yarn run build` creates a `build` directory with a production build of your app. Set up your favorite HTTP server so that a visitor to your site is served `index.html`, and requests to static paths like `/static/js/main.<hash>.js` are served with the contents of the `/static/js/main.<hash>.js` file.
 
 # Appflow
-
+  [!alt text](https://giphy.com/gifs/ec-note-fes86WnCG8cSQOOJey)
+  [!alt text](https://giphy.com/gifs/ec-note-5sYoRujK5MIH4ZGvuG)  
+  [!alt text](https://giphy.com/gifs/ec-note-pjs4HFFjM1JBD5n02H)
 
 # You're done!
 

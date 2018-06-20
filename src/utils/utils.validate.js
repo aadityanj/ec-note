@@ -18,7 +18,7 @@ function loginValidator (emailId, password) {
     return {valid:true, errMsg:"Success"}
 }
 
-function signUpValidator (firstName, lastName, emailId, userName, password) {
+function signUpValidator (firstName, lastName, emailId, password) {
     var errMsg;
     var valid = true
 
@@ -30,9 +30,6 @@ function signUpValidator (firstName, lastName, emailId, userName, password) {
         valid = false
     } else if(!(password && isNotEmpty(password)=="success")){
         errMsg = "Address Line1 is mandatory."
-        valid = false
-    } else if(!(userName && isAlphaNumeric(userName)=="success")){
-        errMsg = "Please provid valid user name"
         valid = false
     }
 

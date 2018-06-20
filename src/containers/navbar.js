@@ -53,7 +53,6 @@ class Navbar extends Component {
                     <Grid.Column floated='right'>
                         <Dropdown pointing text={this.state.label} className="username">  
                         <Dropdown.Menu>
-                            <Dropdown.Item>Profile Settings</Dropdown.Item>
                             <Dropdown.Item  onClick={this.handleLogout}>Logout</Dropdown.Item>
                         </Dropdown.Menu>    
                         </Dropdown>

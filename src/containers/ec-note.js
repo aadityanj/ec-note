@@ -6,8 +6,7 @@ import { setUser } from '../actions';
 import Note from '../components/notes';
 import { isNotEmpty } from '../utils/validator';
 import _ from 'lodash';
-
-
+import moment from 'moment';
 
 class EcNote extends Component {
 
@@ -40,7 +39,7 @@ class EcNote extends Component {
         this.toggleHistory = this.toggleHistory.bind(this);
         this.handleChangeEvent = this.handleChangeEvent.bind(this);
         this.handleClickEvent = this.handleClickEvent.bind(this);
-        this.restoreHistory = this.restoreHistory.bind(this);
+        this.selectedHistory = this.selectedHistory.bind(this);
     }
 
     componentDidMount(){
@@ -120,13 +119,13 @@ class EcNote extends Component {
 
     /* Handling Events from Notes */
 
-    handleClickEvent(event, itemId, index, action) {
+    handleClickEvent(itemId, index, action) {
         switch (action) {
             case 'trash':  this.handleDeleteNote(itemId, index); break;
-            case 'history': this.toggleHistory(itemId, index); break;
+            case 'history': this.toggleHistory(itemId, index, 'default'); break;
             case 'max': this.handleMaxMin(itemId, index, action); break;
             case 'min': this.handleMaxMin(itemId, index, action); break; 
-            case 'restoreHistory': this.restoreHistory(itemId, index); break;
+            case 'selectHistory': this.selectedHistory(itemId, index); break;
         }
     }
 
@@ -148,6 +147,10 @@ class EcNote extends Component {
             })
         } else {
             note[index].isMax = false
+            note[index].isHistory = false;
+            if(note[index].history) {
+                note[index].notes = note[index].history[0].revisedNote;
+            }
             this.setState({
                 notes: note
             })
@@ -190,7 +193,6 @@ class EcNote extends Component {
             focussedNoteIndex: index
         })
         console.log(this.state.timerStatus);
-        
         if(action == "save") {
             let note = _.clone(this.state.notes);
             note[index].loading = true;
@@ -214,9 +216,11 @@ class EcNote extends Component {
             return false;   
         }
 
+
         if (this.state.timerStatus) {
             this.setState(()=> clearTimeout(this.timeout));
         }
+
         this.setState({ timerStatus: true, timer: ''});
         let timer = setTimeout(
             function () {
@@ -242,6 +246,37 @@ class EcNote extends Component {
             }); 
         }.bind(this), 500);
         this.setState( () => {  this.timeout = timer });
+
+        if (note[index].isHistory && action === "note") {
+            let lastupdates = moment.utc(note[index].history[0].updatedAt).format("mm");
+            let currentdates = moment.utc().format("mm");
+            console.log("time difference",lastupdates);
+            if ( currentdates - lastupdates > 1 ) {
+                console.log("Editing in same index and time diff > 1");
+                let newHistory = {};
+                newHistory.revisedNote = target.value;
+                newHistory.updatedAt = moment();
+                console.log("TargetValue" ,target.value);
+                note[index].history[this.state.prvhistoryIndex].active = false;
+                let newN = [newHistory, ...note[index].history];
+                note[index].history = newN;
+                note[index].isHistory = true;
+                note[index].history[0].active = true;
+                this.setState({
+                    notes: note,
+                    prvhistoryIndex: 0
+                })
+            } else {
+                console.log("Editing in same index and time diff < 1");
+                note[index].history[this.state.prvhistoryIndex].active = false;
+                note[index].history[0].active = true;
+                note[index].history[0].revisedNote = target.value;    
+                this.setState({
+                    notes: note,
+                    prvhistoryIndex: 0
+                })
+            }
+        }
     }
 
     closeConfirmMsg(){
@@ -267,7 +302,7 @@ class EcNote extends Component {
         this.setState({visibleForm: !this.state.visibleForm})
     }
 
-    restoreHistory(index, hIndex) {
+    selectedHistory(index, hIndex) {
         console.log("restoring" + index, hIndex);
         let note = _.clone(this.state.notes);
         note[index].history[this.state.prvhistoryIndex].active = false;
@@ -280,14 +315,16 @@ class EcNote extends Component {
         })
     }
 
-    toggleHistory(itemId, index) {
+    toggleHistory(itemId, index, action) {
         let note = _.clone(this.state.notes);
-        note[index].isHistory = !note[index].isHistory
+        if(action === 'default')
+             note[index].isHistory = !note[index].isHistory
+        else
+            note[index].isHistory = true;     
         if(note[index].isHistory){
             getHistory(note[index].id).then( res => {
                 if(res.status === 200) {
                     note[index].history = res.data;
-                    
                     note[index].history[0].active = true;
                     this.setState({
                         notes: note,
