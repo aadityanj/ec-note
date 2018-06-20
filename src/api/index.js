@@ -1,38 +1,39 @@
 import axios from 'axios'
+import { serverURL } from '../url';
 
 function login (emailId, password) {
-    return axios.post('http://localhost:4200/auth/login', {
+    return axios.post( serverURL +'auth/login', {
         'emailId': emailId,
         password: password 
       });
 }
 
 function signUp (user) {
-    return axios.post('http://localhost:4200/auth/create', user );
+    return axios.post( serverURL +'auth/create', user );
 }
 
 function getUser(token) {
-    return axios.get("http://localhost:4200/user", getToken());
+    return axios.get( serverURL + "user", getToken());
 }
 
 function getNotes(token) {
-    return axios.get("http://localhost:4200/note/all", getToken());
+    return axios.get( serverURL + "note/all", getToken());
 }
 
 function createNote(note) {
-    return axios.post("http://localhost:4200/note", note, getToken() )
+    return axios.post(serverURL + "note", note, getToken() )
 }
 
 function moveToTrash(note) {
-    return axios.put("http://localhost:4200/note/trash", note, getToken() )
+    return axios.put(serverURL + "note/trash", note, getToken() )
 }
 
 function updateNote(id, note) {
-    return axios.put("http://localhost:4200/note/"+id,note, getToken());
+    return axios.put(serverURL + "note/"+id,note, getToken());
 }
 
 function getHistory(id) {
-    return axios.get("http://localhost:4200/note/history/"+id, getToken());
+    return axios.get(serverURL + "note/history/"+id, getToken());
 }
 
 function getToken(){
