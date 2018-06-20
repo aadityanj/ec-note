@@ -34,9 +34,9 @@ Ec-Note is a web application designed for notes taking, maintaining the revision
   `yarn run build` creates a `build` directory with a production build of your app. Set up your favorite HTTP server so that a visitor to your site is served `index.html`, and requests to static paths like `/static/js/main.<hash>.js` are served with the contents of the `/static/js/main.<hash>.js` file.
 
 # Appflow
-  ![Signup](https://giphy.com/gifs/ec-note-fes86WnCG8cSQOOJey)
-  ![!Notes](https://giphy.com/gifs/ec-note-5sYoRujK5MIH4ZGvuG)  
-  ![!Version](https://giphy.com/gifs/ec-note-pjs4HFFjM1JBD5n02H)
+  ![Signup and Signin](https://media.giphy.com/media/fes86WnCG8cSQOOJey/giphy.gif)
+  ![Notes](https://media.giphy.com/media/5sYoRujK5MIH4ZGvuG/giphy.gif)  
+  ![Versions](https://media.giphy.com/media/pjs4HFFjM1JBD5n02H/giphy.gif)
 
 # You're done!
 
